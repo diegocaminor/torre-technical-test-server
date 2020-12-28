@@ -14,7 +14,14 @@ const biosApi = require("./routes/bios");
 const jobsApi = require("./routes/jobs");
 
 // Import errorHandlers middleware
-const { logErrors, errorHandler } = require("./utils/middleware/errorHandlers");
+const {
+  logErrors,
+  wrapErrors,
+  errorHandler,
+} = require("./utils/middleware/errorHandlers");
+
+// Import notFoundHandler
+const notFoundHandler = require("./utils/middleware/notFoundHandler");
 
 // Middlewares
 app.use(bodyParser.json());
@@ -26,6 +33,9 @@ app.use(cors());
 // Routes
 biosApi(app);
 jobsApi(app);
+
+// Catch 404
+app.use(notFoundHandler);
 
 // ErrorHandlers middleware
 app.use(logErrors);
