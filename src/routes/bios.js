@@ -1,16 +1,19 @@
 const express = require("express");
-const { userBioMock } = require("../utils/mocks/bio");
+const BiosService = require("../services/bios");
 
 function biosApi(app) {
   const router = express.Router();
   app.use("/api/bios", router);
 
+  const biosService = new BiosService();
+
   router.get("/:username", async function (req, res, next) {
     try {
-      const userBio = await Promise.resolve(userBioMock);
+      const { username } = req.params;
+      const userData = await biosService.getBioByUsername({ username });
       res.status(200).json({
-        data: userBio,
-        message: "Bio retrieved",
+        data: userData.bio,
+        message: userData.message,
       });
     } catch (err) {
       next(err);
