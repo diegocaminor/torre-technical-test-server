@@ -3,14 +3,11 @@ const { config } = require("../config/index");
 
 class BiosService {
   async getBioByUsername({ username }) {
-    console.log("get bio by username");
     let userData = {};
     userData.bio = await axios
       .get(`${config.torreBioUrl}${username}`)
       .then(function (response) {
-        console.log("User found!!!!");
         console.log(response.data);
-        console.log("User found!!!!");
         return response.data;
       })
       .catch(function (error) {
@@ -18,6 +15,24 @@ class BiosService {
         return "";
       });
     userData.bio
+      ? (userData.message = "User found")
+      : (userData.message = "User not found");
+    return userData || "";
+  }
+
+  async getSkillsByUsername({ username }) {
+    let userData = {};
+    userData.skills = await axios
+      .get(`${config.torreBioUrl}${username}`)
+      .then(function (response) {
+        let skills = response.data.strengths.map((strength) => strength.name);
+        return skills;
+      })
+      .catch(function (error) {
+        console.log("User not found");
+        return "";
+      });
+    userData.skills
       ? (userData.message = "User found")
       : (userData.message = "User not found");
     return userData || "";
