@@ -1,12 +1,31 @@
 {
   "name": "torre-technical-test-server",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "API for torre technical test",
+  "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "DEBUG=app:* nodemon src/index",
+    "start": "NODE_ENV=production node src/index",
+    "inspect": "node --inspect src/index"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/diegocaminor/torre-technical-test-server.git"
+  },
+  "author": "Diego Camino",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/diegocaminor/torre-technical-test-server/issues"
+  },
+  "homepage": "https://github.com/diegocaminor/torre-technical-test-server#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^4.3.1",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
 }
