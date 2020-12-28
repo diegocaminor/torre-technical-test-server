@@ -10,7 +10,7 @@ function biosApi(app) {
       const userBio = await Promise.resolve(userBioMock);
       res.status(200).json({
         data: userBio,
-        message: "Bio retrieve",
+        message: "Bio retrieved",
       });
     } catch (err) {
       next(err);
