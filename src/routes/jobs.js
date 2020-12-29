@@ -13,11 +13,18 @@ function jobsApi(app) {
     try {
       const { username } = req.params;
       const userData = await biosService.getSkillsByUsername({ username });
-      const jobs = await jobsService.getMatchJobs(userData.skills);
-      res.status(200).json({
-        data: jobs.matchedJobs,
-        message: jobs.message,
-      });
+      if (!userData.skills.length) {
+        res.status(204).json({
+          data: userData.skills,
+          message: userData.message,
+        });
+      } else {
+        const jobs = await jobsService.getMatchJobs(userData.skills);
+        res.status(200).json({
+          data: jobs.matchedJobs,
+          message: jobs.message,
+        });
+      }
     } catch (err) {
       next(err);
     }

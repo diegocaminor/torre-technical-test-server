@@ -16,7 +16,10 @@ class JobsService {
       or: conditions,
     };
     const jobs = {};
-    jobs.matchedJobs = await axios
+    jobs.matchedJobs = {};
+    jobs.size = 0;
+    jobs.total = 0;
+    const data = await axios
       .post(
         `${config.torreSearchUrl}opportunities/_search/?currency=USD%24&page=0&periodicity=hourly&lang=es&size=20&aggregate=true&offset=0`,
         body
@@ -28,6 +31,9 @@ class JobsService {
         console.log("No match :( Try updating your skills");
         return "";
       });
+    jobs.matchedJobs.results = data.results;
+    jobs.matchedJobs.size = data.size;
+    jobs.matchedJobs.total = data.total;
     jobs.matchedJobs
       ? (jobs.message = "Jobs matched found :D")
       : (jobs.message = "No matched jobs :( Try updating your skills");
