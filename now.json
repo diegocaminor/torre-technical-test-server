@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "builds": [{ "src": "src/index.js", "use": "@now/node" }],
+  "routes": [{ "src": "/(.*)", "dest": "src/index.js" }],
+  "env": {
+    "TORRE_BIO_URL": "@torre_bio_url",
+    "TORRE_SEARCH_URL": "@torre_search_url"
+  }
+}
