@@ -1,6 +1,6 @@
 # :ledger: torre-technical-test-server
 
-Api server .../api for .../client
+Api server https://torre-technical-test-server.vercel.app/api/ for https://matchifywithtorre.netlify.app/genome
 
 ### 🛠️ Technologies
 
